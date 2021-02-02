@@ -1,4 +1,4 @@
- <mftp>
+<mftp>
 <transferName>BPS_UAT_TO_BANKSERV_2</transferName>
 <source>
 	<name>TEST</name>
