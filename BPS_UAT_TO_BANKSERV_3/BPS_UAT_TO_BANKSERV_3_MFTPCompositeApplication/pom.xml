@@ -9,6 +9,11 @@
   <name>BPS_UAT_TO_BANKSERV_3_MFTPCompositeApplication</name>
   <description>BPS_UAT_TO_BANKSERV_3_MFTPCompositeApplication</description>
   <properties>
+    <TransferURL>var_transferURK</TransferURL>
+    <TransferFileNamePattern>var_Pattern</TransferFileNamePattern>
+    <com.example.BPS_UAT_TO_BANKSERV_3_MFTP.inbound-endpoint_._BPS_UAT_TO_BANKSERV_3_IEP>capp/EnterpriseServiceBus</com.example.BPS_UAT_TO_BANKSERV_3_MFTP.inbound-endpoint_._BPS_UAT_TO_BANKSERV_3_IEP>
+    <com.example.BPS_UAT_TO_BANKSERV_3_MFTP.resource_._BPS_UAT_TO_BANKSERV_3_mftp_properties_xml>capp/EnterpriseIntegrator</com.example.BPS_UAT_TO_BANKSERV_3_MFTP.resource_._BPS_UAT_TO_BANKSERV_3_mftp_properties_xml>
+    <com.example.BPS_UAT_TO_BANKSERV_3_MFTP.lib_._fileconnector-connector>capp/EnterpriseServiceBus</com.example.BPS_UAT_TO_BANKSERV_3_MFTP.lib_._fileconnector-connector>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
   </properties>
   <repositories>
@@ -94,6 +99,34 @@
               <operation>deploy</operation>
             </CarbonServer>
           </carbonServers>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <includes>
+            <include>${basedir}/target/**/*.xml</include>
+          </includes>
+          <replacements>
+            <replacement>
+              <token>@TransferURL</token>
+              <value>${TransferURL}</value>
+            </replacement>
+            <replacement>
+              <token>@TransferFileNamePattern</token>
+              <value>${TransferFileNamePattern}</value>
+            </replacement>
+          </replacements>
         </configuration>
       </plugin>
     </plugins>
